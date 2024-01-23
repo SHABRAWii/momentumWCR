@@ -3,7 +3,7 @@
 if [ "$1" == "hotspot" ]; then
     # Hotspot Configuration
     sudo service NetworkManager start
-    sudo nmcli device wifi hotspot ssid Momentum-wcr password momentum_2024
+    sudo nmcli device wifi hotspot ssid Momentum-wcr password momentum_2024 ifname wlan0
 
 elif [ "$1" == "normalwifi" ]; then
     # Normal Wi-Fi Configuration
