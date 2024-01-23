@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serial Data</title>
+</head>
+<body>
+    <h1>Last 10 Serial Readings</h1>
+    <ul>
+        {% for reading in serial_data %}
+            <li>{{ reading }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
