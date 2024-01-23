@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #camera-feed {
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
+        #uart-data {
+            white-space: pre-line;
+            border: 2px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Momentum WCR</h1>
+
+    <!-- Camera Feed -->
+    <video id="camera-feed" autoplay playsinline></video>
+
+    <!-- UART Data -->
+    <div id="uart-data"></div>
+
+    <script>
+        // Use JavaScript to access and display camera feed
+        const video = document.getElementById('camera-feed');
+        const uartDataContainer = document.getElementById('uart-data');
+
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        async function fetchUARTData() {
+            try {
+                const response = await fetch('/api/uart-data');
+                const data = await response.text();
+                uartDataContainer.textContent = data;
+            } catch (error) {
+                console.error('Error fetching UART data:', error);
+            }
+        }
+
+        // Start camera and fetch UART data when the page loads
+        startCamera();
+        fetchUARTData();
+
+        // Periodically fetch UART data (adjust the interval as needed)
+        setInterval(fetchUARTData, 0.1); // Fetch every 5 seconds
+    </script>
+</body>
+</html>

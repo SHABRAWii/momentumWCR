@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UART Data Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid #ccc;
+        }
+        #data-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>UART Data Display</h1>
+    <div id="data-container"></div>
+
+    <script>
+        // Use JavaScript to fetch and display data
+        const dataContainer = document.getElementById('data-container');
+
+        async function fetchData() {
+            const response = await fetch('/api/uart-data');
+            const data = await response.text();
+
+            // Split data into messages
+            const messages = data.split('\n').filter(Boolean);
+
+            // Display the last 10 messages
+            const lastMessages = messages.slice(-10);
+
+            // Update the data container
+            dataContainer.innerHTML = lastMessages.map(message => `<p>${message}</p>`).join('');
+
+            fetchData(); // Keep fetching data
+        }
+
+        fetchData(); // Start fetching data when the page loads
+    </script>
+</body>
+</html>

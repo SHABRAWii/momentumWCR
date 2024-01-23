@@ -1,0 +1,7 @@
+../Core/Src/main.c:83:6:time_to_str	8	static
+../Core/Src/main.c:93:10:ticks_to_us	0	static
+../Core/Src/main.c:99:6:get_pwm_values	24	static
+../Core/Src/main.c:235:6:SystemClock_Config	72	static,ignoring_inline_asm
+../Core/Src/main.c:143:5:main	136	static,ignoring_inline_asm
+../Core/Src/main.c:455:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/main.c:494:6:Error_Handler	0	static,ignoring_inline_asm
