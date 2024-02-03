@@ -1,5 +1,14 @@
 #!/bin/bash
 
+sudo systemctl stop hostapd
+
+sudo systemctl stop dnsmasq
+sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.wifi
+sudo echo "interface wlan0" >> /etc/dhcpcd.conf.hotspot
+sudo echo "static ip_address=192.168.0.10/24" >> /etc/dhcpcd.conf.hotspot
+sudo echo "denyinterfaces eth0" >> /etc/dhcpcd.conf.hotspot
+sudo echo "denyinterfaces wlan0" >> /etc/dhcpcd.conf.hotspot
+
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.wifi 
 sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
 sudo echo "dhcp-range=192.168.0.11,192.168.0.30,255.255.255.0,24h" >> /etc/dnsmasq.conf
